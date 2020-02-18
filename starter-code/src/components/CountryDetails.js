@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+import countries from '../countries.json'
 
 class CountryDetails extends Component {
 
@@ -8,22 +10,14 @@ class CountryDetails extends Component {
             return eachCountry.cca3 === this.props.match.params.hippopotamus
         })
         console.log(theCountry)
-        return theCountry; 
-    }
-
-    twoPlusTwo = () => {
-        return 4
+        return theCountry;
     }
 
     render() {
         let theCountry = this.findDetails()
-        console.log(theCountry)
-
         return (
-
             <div className="col-7">
-
-            <h1>{theCountry.name.common}</h1>
+            <h1>{theCountry.flag} {theCountry.name.common}</h1>
             <table className="table">
               <thead></thead>
               <tbody>
@@ -33,23 +27,22 @@ class CountryDetails extends Component {
                 </tr>
                 <tr>
                   <td>Area</td>
-                  <td>551695 km
+                  <td>{theCountry.area}
            <sup>2</sup>
                   </td>
                 </tr>
                 <tr>
                   <td>Borders</td>
                   <td>
-                    <ul>
-                      <li><a href="/AND">Andorra</a></li>
-                      <li><a href="/BEL">Belgium</a></li>
-                      <li><a href="/DEU">Germany</a></li>
-                      <li><a href="/ITA">Italy</a></li>
-                      <li><a href="/LUX">Luxembourg</a></li>
-                      <li><a href="/MCO">Monaco</a></li>
-                      <li><a href="/ESP">Spain</a></li>
-                      <li><a href="/CHE">Switzerland</a></li>
-                    </ul>
+                  <ul>
+                    {theCountry.borders.map(borderCountry => (
+                        <li key={borderCountry}>
+                            <Link to={`/country-detail/${borderCountry}`}>
+                                {countries.find(country => country.cca3 === borderCountry).name.common}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
                   </td>
                 </tr>
               </tbody>

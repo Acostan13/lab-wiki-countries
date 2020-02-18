@@ -7,9 +7,8 @@ import countries from './countries.json'
 class App extends Component {
 
   state = {
-    countries// Same thing ===> countries:countries
+    countries,// Same thing ===> countries:countries
   }
-
 
   showCountryLinks = () => {
     let countryList = [...this.state.countries]
@@ -40,7 +39,6 @@ class App extends Component {
         {/**Invisible */}
         <Switch>
           <Route exact path="/country-detail/:hippopotamus" render={(props) => <CountryDetails {...props} cool="super fantastically amaxzing" countries={this.state.countries} />} />
-
         </Switch>
       </div>
     );
